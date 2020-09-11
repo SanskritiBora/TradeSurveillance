@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style3.css">
+
+
+
+
+    <title>Trade Surveillance</title>
+</head>
+
+<body>
+    <img src="image.jpg">
+
+    <div class="login">
+        <div class="topnav">
+            <div class="topnav-centered">
+                <a href="#">Home</a> </div>
+            <div class="topnav-right">
+                <a href="graph.html">Graph</a></div>
+            <a href="trades">Trade List</a>
+
+        </div>
+
+        <h1 class="head">Trade Surveillance</h1>
+
+        <form id="form1" method="post" action="tradesurveillance.jsp">
+            <fieldset class="field">
+                <legend class="legend">Trade Entry Form:</legend>
+
+                <div class="trader">
+
+                    <label for="client-order">Trader:</label>
+                    <div class="rbutton">
+                        
+                    
+                    <select id="Trader" name="Trader" required>
+                        <option value="" disabled selected>Select the trader:</option>
+                        <option value="Client">Client </option>
+                        <option value="Firm">Firm </option>
+
+                    </select>
+                        <br><br>
+
+                </div>
+                <div class="box1">
+                    <div class="TradeID">
+
+                        <label for="TradeID">TradeID:</label>
+                        <br>
+                        <input type="text" id="TradeID" name="TradeID" required>
+                        <br><br>
+                    </div>
+
+                    <div class="tradetype">
+                        <label for="tradetype"> Trade Type:</label>
+                        <br>
+
+                        <select id="security" name="security" required>
+                            <option value="" disabled selected>Select the type:</option>
+                            <option value="Equity">Equity </option>
+                            <option value="F&O">F&O </option>
+
+                        </select>
+                        <br><br>
+
+                    </div>
+
+                    <div class="buyorsell">
+                        <label for="tradetype"> buyorsell</label>
+                        <br>
+
+                        <select id="buyorsell" name="buyorsell" required>
+                            <option value="" disabled selected>Select the type:</option>
+                            <option value="buy">buy </option>
+                            <option value="sell">sell </option>
+
+                        </select>
+                        <br><br>
+
+                    </div>
+
+                    <div class="clientid">
+
+                        <label for="Choose the client or firm">Client ID</label>
+                        <br>
+                        <select id="Client" name="Client" required>
+                            <option value="" disabled selected>Select the client or firm:</option>
+                            <option value="cl1">Himanshu</option>
+                            <option value="cl2">Sanskriti</option>
+                            <option value="cl3">Nilesh</option>
+                            <option value="cl4">Krutika</option>
+                            <option value="cl5">Shravani</option>
+                            <option value="f1">Firm </option>
+
+                        </select>
+
+                    </div>
+                    <br>
+                    <div class="Company">
+                        <label for="Company"> Company:</label>
+                        <br>
+
+                        <select id="Company" name="Company" required>
+                            <option value="" disabled selected>Select the Company:</option>
+                            <option value="Facebook">Facebook </option>
+                            <option value="Walmart">Walmart </option>
+                            <option value="Apple">Apple </option>
+
+                        </select>
+                        <br><br>
+
+                    </div>
+                </div>
+
+
+                <div class="box2">
+
+                    <div class="broker">
+                        <label for="Choose the broker">Broker:</label>
+                        <br>
+                        <select id="Broker" name="Broker" required>
+                            <option value="" disabled selected>Select the Broker:</option>
+                            <option value="b01">Zerodha</option>
+                            <option value="b02">Upstox</option>
+                            <option value="b03">Edelweiss</option>
+
+                        </select>
+                        <br><br>
+
+                    </div>
+
+                    <div class="quantity">
+
+                        <label for="Quantity">Quantity of order:</label>
+                        <br>
+                        <input type="integer" id="qty" name="qty" required>
+                        <br><br>
+                    </div>
+
+                    <div class="Price">
+
+                        <label for="Price">Price of each share:</label>
+                        <br>
+                        <input type="integer" id="Price" name="Price" required>
+                        <br><br>
+                    </div>
+
+                    <div class="time">
+                        <label for="time">Enter the time:</label>
+
+                        <input id="date" type="datetime-local" name="date" step="1" required>
+                        <br><br>
+                    </div>
+
+                </div>
+                <button type="submit" class="button button-block" />Add Trade</button>
+            </fieldset>
+        </form>
+    </div>
+
+    <br><br>
+
+    <p id="para"></p>
+</body>
+
+</html>
