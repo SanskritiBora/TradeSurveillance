@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style3.css">
-
+	
 
 
 
@@ -17,12 +17,11 @@
 
     <div class="login">
         <div class="topnav">
-            <div class="topnav-centered">
-                <a href="#">Home</a> </div>
-            <div class="topnav-right">
-                <a href="graph.html">Graph</a></div>
-            <a href="trades">Trade List</a>
-
+            <a href="retrieval.jsp">Customer Trade List</a>
+            <a href="retrieval1.jsp">Firm Trade List</a>
+			<a href="fraud.jsp">Frauds</a>
+			<a href="washtrade.jsp">Wash Trades</a>
+			<a href="graph.html">Graph</a>
         </div>
 
         <h1 class="head">Trade Surveillance</h1>
@@ -75,8 +74,8 @@
 
                         <select id="buyorsell" name="buyorsell" required>
                             <option value="" disabled selected>Select the type:</option>
-                            <option value="buy">buy </option>
-                            <option value="sell">sell </option>
+                            <option value="BUY">BUY </option>
+                            <option value="SELL">SELL</option>
 
                         </select>
                         <br><br>
@@ -89,12 +88,14 @@
                         <br>
                         <select id="Client" name="Client" required>
                             <option value="" disabled selected>Select the client or firm:</option>
-                            <option value="cl1">Himanshu</option>
-                            <option value="cl2">Sanskriti</option>
-                            <option value="cl3">Nilesh</option>
-                            <option value="cl4">Krutika</option>
-                            <option value="cl5">Shravani</option>
-                            <option value="f1">Firm </option>
+                            <option value="Himanshu Upadhyay">Himanshu Upadhyay</option>
+                            <option value="Sanskriti Bora">Sanskriti Bora</option>
+                            <option value="Nilesh Kavhale">Nilesh Kavhale</option>
+                            <option value="Krutika Padeer">Krutika Padeer</option>
+                            <option value="Shravani Shah">Shravani Shah</option>
+                            <option value="f1">Firm
+
+							</option>
 
                         </select>
 
@@ -124,9 +125,9 @@
                         <br>
                         <select id="Broker" name="Broker" required>
                             <option value="" disabled selected>Select the Broker:</option>
-                            <option value="b01">Zerodha</option>
-                            <option value="b02">Upstox</option>
-                            <option value="b03">Edelweiss</option>
+                            <option value="Zerodha">Zerodha</option>
+                            <option value="Upstox">Upstox</option>
+                            <option value="Edelweiss">Edelweiss</option>
 
                         </select>
                         <br><br>
