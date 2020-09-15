@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.sql.*" %> 
+<%@ page language="java" import="java.sql.*"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -15,30 +15,46 @@
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<link rel="stylesheet" href="style3.css">
-<link rel = "stylesheet"  type = "text/css" href="Styles/MyRetrieval.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style7.css">
+<title>Trade Surveillance</title>
 </head>
+
 <body>
 
-<h1>Fraud list</h1>
+	<!-- <img src="image.jpg"> -->
+	<div class="topnav">
+		<a href="index.html">New Trade</a> <a href="retrieval.jsp">Customer
+			Trade List</a> <a href="retrieval1.jsp">Firm Trade List</a> <a
+			href="fraud.jsp">Frauds</a> <a href="washtrade.jsp">Wash Trades</a> <a
+			href="graph.html">Graph</a>
 
-        <div class="topnav">
-            <a href="fraud.jsp">Front Running 1</a>
-            <a href="fraud2.jsp">Front Running 2</a>
-			<a href="fraud3.jsp">Front Running 3</a>
-			
-        </div>
+	</div>
+	
+	<div class="topnav2">
+		<a href="fraud.jsp">Front Running 1</a> <a href="fraud2.jsp">Front
+			Running 2</a> <a href="fraud3.jsp">Front Running 3</a>
+		<!-- <div class="quantity">
+			<label for="Search">Search</label> <input type="integer" id="search"
+				name="search">
 
-<table border="1">
-<tr>
-<td>Fraud Type</td>
-<td>Firm tradeid 1</td>
-<td>Firm tradeid 2</td>
-<td>Customer tradeid</td>
-</tr>
-<%
+		</div>
+		 -->
+	</div>
+
+	<div class="table-wrapper">
+		<table border="1" class="fl-table">
+			<tr>
+				<th>Fraud Type</th>
+				<th>Firm tradeid 1</th>
+				<th>Firm tradeid 2</th>
+				<th>Customer tradeid</th>
+			</tr>
+			<%
 try{
 	PreparedStatement pstmt;
 	ResultSet rs = null;
@@ -46,19 +62,25 @@ try{
 	rs=pstmt.executeQuery();
 while(rs.next()){
 %>
-<tr>
-<td><%=rs.getString("fraudtype") %></td>
-<td><%=rs.getLong("firmtradeid") %></td>
-<td><%=rs.getLong("firmtradeid2") %></td>
-<td><%=rs.getLong("customertradeid") %></td>
-</tr>
-<%
+			<tr>
+				<td><%=rs.getString("fraudtype") %></td>
+				<td><%=rs.getLong("firmtradeid") %></td>
+				<td><%=rs.getLong("firmtradeid2") %></td>
+				<td><%=rs.getLong("customertradeid") %></td>
+			</tr>
+			<%
 }
 con.close();
 } catch (Exception e) {
 e.printStackTrace();
 }
 %>
-</table>
+		</table>
+	</div>
+
+	<p class="para" id="para"></p>
+
+
 </body>
+
 </html>

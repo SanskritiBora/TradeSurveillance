@@ -1,4 +1,4 @@
-<%@page language="java" import="java.sql.*" %> 
+<%@ page language="java" import="java.sql.*"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -13,17 +13,35 @@
 		out.println(e);
 	}
 %>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style7.css">
+<title>Trade Surveillance</title>
+</head>
+
 <body>
 
-<h1>Wash Trades</h1>
-<table border="1">
-<tr>
-<td>Firm tradeid 1</td>
-<td>Firm tradeid 2</td>
-</tr>
-<%
+	<!-- <img src="image.jpg"> -->
+	<div class="topnav">
+		<a href="index.html">New Trade</a> <a href="retrieval.jsp">Customer
+			Trade List</a> <a href="retrieval1.jsp">Firm Trade List</a> <a
+			href="fraud.jsp">Frauds</a> <a href="washtrade.jsp">Wash Trades</a> <a
+			href="graph.html">Graph</a>
+
+	</div>
+
+	<div class="table-wrapper">
+		<table border="1" class="fl-table">
+			<tr>
+				<th>Firm tradeid 1</th>
+				<th>Firm tradeid 2</th>
+			</tr>
+			<%
 try{
 	PreparedStatement pstmt;
 	ResultSet rs = null;
@@ -31,17 +49,25 @@ try{
 	rs=pstmt.executeQuery();
 while(rs.next()){
 %>
-<tr>
-<td><%=rs.getLong("firmtradeid") %></td>
-<td><%=rs.getLong("firmtradeid2") %></td>
-</tr>
-<%
+			<tr>
+				<td><%=rs.getLong("firmtradeid") %></td>
+				<td><%=rs.getLong("firmtradeid2") %></td>
+			</tr>
+			<%
 }
 con.close();
 } catch (Exception e) {
 e.printStackTrace();
 }
 %>
-</table>
+		</table>
+	</div>
+
+	<p class="para" id="para"></p>
+
+
 </body>
+
 </html>
+
+

@@ -115,7 +115,7 @@ public class Fraud {
 			int seconds = customerOrders.getInt("seconds");
 			//System.out.print(seconds+"\t");
 			int quantity = customerOrders.getInt("quantity");
-			int price = customerOrders.getInt("price");
+			float price = customerOrders.getFloat("price");
 			//System.out.println(quantity);
 
 			ps = connection.prepareStatement("SELECT * FROM firmorders WHERE company = ? AND (seconds BETWEEN ? AND ?) AND tradeType = 'BUY' AND quantity= ?", ResultSet.TYPE_SCROLL_SENSITIVE, 
@@ -131,7 +131,7 @@ public class Fraud {
 			ps.setString(1, company);
 			ps.setInt(2, seconds);
 			ps.setInt(3,quantity);
-			ps.setInt(4, price);
+			ps.setFloat(4, price);
 
 			ResultSet firmOrdersOnTime = ps.executeQuery(); 
 
@@ -144,7 +144,7 @@ public class Fraud {
 				while(firmOrdersBefore.next()){  
 
 					while(firmOrdersOnTime.next()){  
-						if(firmOrdersBefore.getInt("price") < firmOrdersOnTime.getInt("price")) {
+						if(firmOrdersBefore.getFloat("price") < firmOrdersOnTime.getFloat("price")) {
 							//System.out.println("Front Running 3 found: fraud between "+ firmOrdersBefore.getLong("tradeid") + " and " + firmOrdersOnTime.getLong("tradeid") + " with customer :" + customerOrders.getLong("tradeid"));
 							ps = connection.prepareStatement("insert into fraud (fraudtype, firmtradeid, firmtradeid2, customertradeid) values (?, ?, ?, ?);");  
 							ps.setString(1, "Front-running 3");
@@ -197,7 +197,7 @@ public class Fraud {
 
 	}
 
-	public void checkCustomerTrade(Connection connection, int quantity, String tradeType, String company, int seconds, long tradeid,int price ) throws SQLException{
+	public int checkCustomerTrade(Connection connection, int quantity, String tradeType, String company, int seconds, long tradeid,float price ) throws SQLException{
 		int recordsInserted = 0;
 		long tradeId1, tradeId2;
 		PreparedStatement ps=null;
@@ -282,7 +282,7 @@ public class Fraud {
 			ps.setString(1, company);
 			ps.setInt(2, seconds);
 			ps.setInt(3,quantity);
-			ps.setInt(4, price);
+			ps.setFloat(4, price);
 
 			ResultSet firmOrdersOnTime = ps.executeQuery(); 
 
@@ -294,7 +294,7 @@ public class Fraud {
 				while(firmOrdersBefore.next()){  
 
 					while(firmOrdersOnTime.next()){  
-						if(firmOrdersBefore.getInt("price") < firmOrdersOnTime.getInt("price")) {
+						if(firmOrdersBefore.getFloat("price") < firmOrdersOnTime.getFloat("price")) {
 							//System.out.println("Front Running 3 found: fraud between "+ firmOrdersBefore.getLong("tradeid") + " and " + firmOrdersOnTime.getLong("tradeid") + " with customer :" + customerOrders.getLong("tradeid"));
 							ps = connection.prepareStatement("insert into fraud (fraudtype, firmtradeid, firmtradeid2, customertradeid) values (?, ?, ?, ?);");  
 							ps.setString(1, "Front-running 3");
@@ -315,11 +315,12 @@ public class Fraud {
 			//System.out.println(recordsInserted +" Record inserted successfully");	
 			System.out.println("****************************************************");
 		}
+		return recordsInserted;
 
 
 	}
 
-	public void checkFirmTrade(Connection connection, int quantity, String tradeType, String company, int seconds, long tradeid, int price) throws SQLException{
+	public int checkFirmTrade(Connection connection, int quantity, String tradeType, String company, int seconds, long tradeid, float price) throws SQLException{
 		int recordsInserted=0;
 		long tradeId1;
 		long tradeId2;
@@ -436,7 +437,7 @@ public class Fraud {
 			ps.setInt(2, seconds + 1);
 			ps.setInt(3,  seconds + 60);
 			ps.setInt(4, quantity);
-			ps.setInt(5, price);
+			ps.setFloat(5, price);
 			ResultSet customerOrders = ps.executeQuery();  
 
 			ps = connection.prepareStatement("SELECT * FROM firmorders WHERE company = ? AND (seconds BETWEEN ? AND ?) AND tradeType = 'SELL' AND quantity = ? and price > ?", ResultSet.TYPE_SCROLL_SENSITIVE, 
@@ -445,7 +446,7 @@ public class Fraud {
 			ps.setInt(2, seconds + 1);
 			ps.setInt(3,  seconds + 60);
 			ps.setInt(4,quantity);
-			ps.setInt(5, price);
+			ps.setFloat(5, price);
 
 			ResultSet firmOrdersOnTime = ps.executeQuery(); 
 			if((customerOrders.next()) && (firmOrdersOnTime.next())) { 
@@ -453,7 +454,7 @@ public class Fraud {
 				firmOrdersOnTime.beforeFirst();
 				while(customerOrders.next()){  
 					while(firmOrdersOnTime.next()){  
-						if(customerOrders.getInt("seconds") == firmOrdersOnTime.getInt("seconds") && customerOrders.getInt("price") == firmOrdersOnTime.getInt("price")) {
+						if(customerOrders.getInt("seconds") == firmOrdersOnTime.getInt("seconds") && customerOrders.getFloat("price") == firmOrdersOnTime.getFloat("price")) {
 							//System.out.println("Front Running 3 found: fraud between "+ customerOrders.getLong("tradeid") + " and " + firmOrdersOnTime.getLong("tradeid") + " with customer :" + customerOrders.getLong("tradeid"));
 							ps = connection.prepareStatement("insert into fraud (fraudtype, firmtradeid, firmtradeid2, customertradeid) values (?, ?, ?, ?);");  
 							ps.setString(1, "Front-running 3");
@@ -474,7 +475,7 @@ public class Fraud {
 			ps.setString(1, company);
 			ps.setInt(2, seconds);
 			ps.setInt(3, quantity);
-			ps.setInt(4, price);
+			ps.setFloat(4, price);
 			ResultSet customerOrders = ps.executeQuery();  
 
 			ps = connection.prepareStatement("SELECT * FROM firmorders WHERE company = ? AND (seconds BETWEEN ? AND ?) AND tradeType = 'BUY' AND quantity = ? and price < ?", ResultSet.TYPE_SCROLL_SENSITIVE, 
@@ -483,7 +484,7 @@ public class Fraud {
 			ps.setInt(2, seconds - 60);
 			ps.setInt(3,  seconds );
 			ps.setInt(4,quantity);
-			ps.setInt(5, price);
+			ps.setFloat(5, price);
 
 			ResultSet firmOrdersOnTime = ps.executeQuery(); 
 			if((customerOrders.next()) && (firmOrdersOnTime.next())) { 
@@ -506,10 +507,11 @@ public class Fraud {
 			//System.out.println("****************************************************");
 			
 		}
+		return recordsInserted;
 		//System.out.println(recordsInserted +" Record inserted successfully");
 	}
 	
-	public void checkWashTrade(Connection connection, long tradeid, String tradeType, String broker, String company, int quantity, int price, int seconds) throws SQLException {
+	public int checkWashTrade(Connection connection, long tradeid, String tradeType, String broker, String company, int quantity, float price, int seconds) throws SQLException {
 		int recordsInserted = 0;
 		if(tradeType.equals("SELL")) {
 			PreparedStatement ps = connection.prepareStatement("SELECT * FROM firmorders WHERE tradeid != ? AND tradeType = 'BUY' AND brokername = ? AND company = ? AND quantity = ? AND price = ?");
@@ -517,7 +519,7 @@ public class Fraud {
 			ps.setString(2, broker);
 			ps.setString(3, company);
 			ps.setInt(4, quantity);
-			ps.setInt(5, price);
+			ps.setFloat(5, price);
 			ResultSet washTrades = ps.executeQuery();
 
 			while(washTrades.next()) {			
@@ -535,6 +537,7 @@ public class Fraud {
 				}
 				//System.out.println("****************************************************");
 			}
+		return recordsInserted;
 			//System.out.println(recordsInserted +" Record inserted successfully");
 	}
 

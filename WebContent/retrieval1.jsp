@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page language="java" import="java.sql.*" %> 
+<%@ page language="java" import="java.sql.*"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -17,27 +15,38 @@
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<link rel = "stylesheet"  type = "text/css" href="Styles/MyRetrieval.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style7.css">
+<title>Trade Surveillance</title>
 </head>
+
 <body>
+	<div class="topnav">
+		<a href="index.html">New Trade</a> <a href="retrieval.jsp">Customer
+			Trade List</a> <a href="retrieval1.jsp">Firm Trade List</a> <a
+			href="fraud.jsp">Frauds</a> <a href="washtrade.jsp">Wash Trades</a> <a
+			href="graph.html">Graph</a>
 
-<h1>Firm Orders</h1>
-<table class="center" border="1">
-<tr>
-<td>Trade Id</td>
-<td>Timestamp</td>
-<td>Company</td>
-<td>Trade Type</td>
-<td>Security Type</td>
-<td>Quantity</td>
-<td>Price</td>
-<td>Broker Name</td>
+	</div>
+	<div class="table-wrapper">
+		<table border="1" class="fl-table">
+			<tr>
+				<th>Trade Id</th>
+				<th>Timestamp</th>
+				<th>Company</th>
+				<th>Trade Type</th>
+				<th>Security Type</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>Broker Name</th>
 
-</tr>
+			</tr>
 
-<%
+			<%
 try{
 	PreparedStatement pstmt;
 	ResultSet rs1 = null;
@@ -45,24 +54,32 @@ try{
 	rs1=pstmt.executeQuery();
 while(rs1.next()){
 %>
-<tr>
-<td><%=rs1.getLong("tradeId") %></td>
-<td><%=rs1.getString("timestamp") %></td>
-<td><%=rs1.getString("company") %></td>
-<td><%=rs1.getString("tradeType") %></td>
-<td><%=rs1.getString("securityType") %></td>
-<td><%=rs1.getString("quantity") %></td>
-<td><%=rs1.getString("price") %></td>
-<td><%=rs1.getString("brokerName") %></td>
-</tr>
-<%
+			<tr>
+				<td><%=rs1.getLong("tradeId") %></td>
+				<td><%=rs1.getString("timestamp") %></td>
+				<td><%=rs1.getString("company") %></td>
+				<td><%=rs1.getString("tradeType") %></td>
+				<td><%=rs1.getString("securityType") %></td>
+				<td><%=rs1.getString("quantity") %></td>
+				<td><%=rs1.getString("price") %></td>
+				<td><%=rs1.getString("brokerName") %></td>
+			</tr>
+			<%
 }
 con.close();
 } catch (Exception e) {
 e.printStackTrace();
 }
 %>
-</table>
+		</table>
+	</div>
+
+	<p class="para" id="para"></p>
+
 
 </body>
+
 </html>
+
+
+

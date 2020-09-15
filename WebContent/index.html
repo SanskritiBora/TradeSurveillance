@@ -9,23 +9,17 @@
 </head>
 
 <body>
-
-    <!-- <img src="image.jpg"> -->
     <div class="topnav">
-
-        <a href="retrieval.jsp">Customer List</a>
-        <a href="retrieval1.jsp">Firm List</a>
+       	<a href="index.html">New Trade</a>
+        <a href="retrieval.jsp">Customer Trade List</a>
+        <a href="retrieval1.jsp">Firm Trade List</a>
         <a href="fraud.jsp">Frauds</a>
         <a href="washtrade.jsp">Wash Trades</a>
         <a href="graph.html">Graph</a>
-
     </div>
-
     <div class="login">
 
-
-        <h1 class="head">Trade Surveillance</h1>
-        
+        <h1 class="head">New Trade</h1>
         <form id="form1" method="post" action="tradesurveillance.jsp">
 
         <div class="row">
@@ -33,37 +27,34 @@
 
 
                 <label for="trader" class="trader">Trader</label>
-                <br><br>
+                <br>
                 <select id="trader" class="select" name="Trader" required>
                     <option value="" disabled selected>Select the trader</option>
                     <option value="Customer">Customer </option>
                     <option value="Firm">Firm </option>
                 </select>
                 <br><br>
+                
 
 
-                <label for="TradeType" class="TradeType">Trade Type</label>
-                <br><br>
-                <select id="TradeType" class="select" name="TradeType" required>
+                <label for="TradeType" class="TradeType">Trade Type</label><br>
+                 <select id="TradeType" class="select" name="TradeType" required>
                     <option value="" disabled selected>Select the type</option>
                     <option value="BUY">BUY </option>
                     <option value="SELL">SELL</option>
                 </select>
                 <br><br>
 
-                <label for="security" class="security">Security Type</label>
-                <br><br>
-                <select id="security" class="select" name="security" required>
+                <label for="security" class="security">Security Type</label><br>
+               <select id="security" class="select" name="security" required>
                     <option value="" disabled selected>Select the type</option>
-                    <option value="Shares">Shares</option>
-                   
+                    <option value="Shares">Shares</option> 
                 </select>
                 <br><br>
 
 
                 <div class="TradeID">
-                    <label for="TradeID">TradeID</label>
-                    <br><br>
+                    <label for="TradeID">TradeID</label><br>         
                     <input type="number" id="TradeID" name="TradeID" required placeholder="Enter the TradeID">
                 </div>
                 <br><br>
@@ -72,8 +63,8 @@
 
                 <div class="quantity">
 
-                    <label for="Quantity">Quantity of order</label>
-                    <br><br>
+                    <label for="Quantity">Quantity of order</label><br>
+                    
                     <input type="number" id="qty" name="qty" min="100" max="1000" required placeholder="Enter the quantity">
                 </div>
                 <br><br>
@@ -85,8 +76,7 @@
             <div class="column">
 
 
-                <label for="Company" class="Company">Company</label>
-                <br><br>
+                <label for="Company" class="Company">Company</label><br>
                 <select id="Company" class="select" name="Company" required>
                     <option value="" disabled selected>Select the Company</option>
                     <option value="Facebook">Facebook </option>
@@ -95,8 +85,7 @@
                 </select>
                 <br><br>
 
-                <label for="Broker" class="Broker">Select the Broker</label>
-                <br><br>
+                <label for="Broker" class="Broker">Select the Broker</label><br>
                 <select id="Broker" class="select" name="Broker" required>
                     <option value="" disabled selected>Select the Broker</option>
                     <option value="Zerodha">Zerodha</option>
@@ -105,10 +94,9 @@
                 </select>
                 <br><br>
 
-                <label for="clientID" class="clientID">Customer Name</label>
-                <br><br>
-                <select id="clientID" class="select" name="Client" required>
-                    <option value="" disabled selected>Select the Customer</option>
+                <label for="clientID" class="clientID">Customer Name</label><br>
+                <select id="clientID" class="select" name="clientID" required>
+                    <option value="" disabled selected>Select the client or firm</option>
                     <option value="Himanshu Upadhyay">Himanshu Upadhyay</option>
                     <option value="Sanskriti Bora">Sanskriti Bora</option>
                     <option value="Nilesh Kavhale">Nilesh Kavhale</option>
@@ -119,33 +107,23 @@
                 </select>
                 <br><br>
 
-
-
                 <div class="Price">
                     <label for="Price">Price of each share</label><br>
-					<br>
                     <input type="number" min="10" max="3000" id="Price" name="Price" required>
 
                 </div><br><br>
 
                 <div class="time">
-                    <label for="time">Enter the time</label> <br><br>
+                    <label for="time">Time</label> <br>
                     <input id="date" type="datetime-local" name="date" step="1" required><br>
 
                 </div>
             </div>
         </div>
-        
-		<br><br>
         <button id="add" type="submit" class="button button-block"/>Add Trade</button>
-
         </form>
     </div>
 
-
     <p class="para" id="para"></p>
-
-
 </body>
-
 </html>

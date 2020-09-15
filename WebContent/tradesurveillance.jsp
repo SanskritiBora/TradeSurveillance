@@ -1,18 +1,37 @@
 <%@ page language="java" import="java.sql.*" %> 
 <%@ page language="java" import="com.trade.Fraud" %> 
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style7.css">
+    <title>Trade Surveillance</title>
+</head>
+
+<body>
+    <div class="topnav">
+       	<a href="index.html">New Trade</a>
+        <a href="retrieval.jsp">Customer Trade List</a>
+        <a href="retrieval1.jsp">Firm Trade List</a>
+        <a href="fraud.jsp">Frauds</a>
+        <a href="washtrade.jsp">Wash Trades</a>
+        <a href="graph.html">Graph</a>
+    </div>
+    <div class="login">
 <%
 	Connection con=null;
 	PreparedStatement ps=null;
 	long tradeid = Long.parseLong(request.getParameter("TradeID"));
-	String customerName=request.getParameter("Client");
+	String customerName=request.getParameter("clientID");
 	String trader = request.getParameter("Trader");
 	String timestamp = request.getParameter("date");
 	String company = request.getParameter("Company");
 	String sectype = request.getParameter("security");
 	String tradetype = request.getParameter("TradeType");
 	int quantity = Integer.parseInt(request.getParameter("qty"));
-	int price = Integer.parseInt(request.getParameter("Price"));
+	float price = Float.parseFloat(request.getParameter("Price"));
 	String broker = request.getParameter("Broker");
 	int seconds=0;
 	int j[] = new int[3];
@@ -37,7 +56,7 @@
 			ps.setString(5, sectype);
 			ps.setString(6, tradetype);
 			ps.setInt(7, quantity);
-			ps.setInt(8, price);
+			ps.setFloat(8, price);
 			ps.setString(9,broker);
 			ps.setInt(10,seconds);
 			
@@ -51,26 +70,60 @@
 			ps.setString(4, sectype);
 			ps.setString(5, tradetype);
 			ps.setInt(6, quantity);
-			ps.setInt(7, price);
+			ps.setFloat(7, price);
 			ps.setString(8,broker);
 			ps.setInt(9,seconds);
 		}
 		
 		int i = ps.executeUpdate();
 		if(i == 1){
-			out.println("Trade inserted successfully");
+			
+%>
+      <h1 class="head">Trade inserted sucessfully!</h1>
+<%
 		}else{
-			out.println("Trade is not inserted properly");
+%>
+      <h1 class="head">Error occurred while entering trade</h1>
+<%
 		}
 		
 		Fraud tr=new Fraud();
 		if(trader.equals("Customer")){
-			tr.checkCustomerTrade(con,quantity, tradetype,  company, seconds, tradeid, price );
+			int num=tr.checkCustomerTrade(con, quantity, tradetype, company, seconds, tradeid, price);
+			if(num>0){
+				%>
+			      <h1 class="head">New Frauds Detected!</h1>
+			<%
+					}else{
+			%>
+			      <h1 class="head">No Frauds Found!</h1>
+			<%
+			}
+			
 			
 		}
 		else{
-			tr.checkFirmTrade(con,quantity, tradetype,  company, seconds, tradeid, price );
-			tr.checkWashTrade(con, tradeid, tradetype, broker, company, quantity, price, seconds);
+			int num1=tr.checkFirmTrade(con, quantity, tradetype, company, seconds, tradeid, price);
+			if(num1>0){
+				%>
+			      <h1 class="head">New Frauds Detected!</h1>
+			<%
+					}else{
+			%>
+			      <h1 class="head">No Frauds Found!</h1>
+			<%
+			}
+			int num=tr.checkWashTrade(con, tradeid, tradetype, broker, company, quantity, price, seconds);
+			if(num>0){
+				%>
+			      <h1 class="head">Wash Trade Detected!</h1>
+			<%
+					}else{
+			%>
+			      <h1 class="head">No WashTrade Found!</h1>
+			<%
+			}
+			
 		}
 		
 		
@@ -79,5 +132,9 @@
 	}catch(Exception e){
 		out.println(e);
 	}
-%>
+%> 
+    </div>
 
+    <p class="para" id="para"></p>
+</body>
+</html>
