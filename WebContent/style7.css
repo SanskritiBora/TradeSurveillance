@@ -1,0 +1,351 @@
+body{
+  background-color: seashell; 
+  text-align: justify;
+  
+}
+
+/* css for the main box */
+
+.login{
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  width: 900px;
+  padding-top: 50px;
+  padding-right: 0px;
+  padding-bottom: 90px;
+  padding-left: 110px;
+  height: 930px;
+  
+  transform: translate(-50%, -50%);
+  background-color: mintcream;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+  opacity: 1;
+}
+
+/* css for head */
+
+.head{
+  margin: 0 0 30px;
+  padding-top: 0px;
+  padding-right: 90px;
+  padding-bottom: 0px;
+  padding-left: 10px;
+  color: black;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 50px;
+}
+
+/* css for nav bar buttons */
+
+.topnav {
+  position: relative;
+  overflow: hidden;
+  background-color: #333;
+  border-radius: 5px;
+  
+}
+
+.topnav a {
+  align-content: center;
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+ 
+
+@media screen and (max-width: 600px) {
+  .topnav a, .topnav-right {
+    float: none;
+    display: block;
+  }
+  
+  .topnav-centered a {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+}
+
+/* css for select elements */
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #2c3e50;
+  background-image: none;
+  font-size: 16px;
+
+}
+
+select::-ms-expand {
+  display: none;
+  font-size: 16px;
+
+}
+.select {
+  position: relative;
+  font-size: 16px;
+
+  display: flex;
+  /* width: 20em; */
+  width: 266px;
+  height: 3em;
+  line-height: 3;
+  background: #d6d8dd;
+  overflow: hidden;
+  border-radius: .25em;
+}
+select {
+  flex: 1;
+  padding: 0 .5em;
+  color: rgb(14, 13, 13);
+  cursor: pointer;
+  font-size: 16px;
+
+}
+.select option{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.select::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #34495e;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+.select:hover::after {
+  color: #f39c12;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* making two columns */
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; 
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+} 
+
+/* submit button styling */
+
+.button{
+  width: 100%;
+  /* padding-right: 30px;
+  padding-left: 580px; */
+  margin-top: 41%;
+  border-radius: 20px;
+  border: none;
+  border-bottom: 4px solid #3e4f24;
+  background: #808080; 
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  border-radius: 5px solid red;
+}
+
+
+.button:hover {
+  background: rgba(0, 0, 0, 0.15);
+  color: black;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  opacity: 1;
+  
+  
+}
+
+.button {
+  font-family: 'Titillium Web', sans-serif;
+  border:0;
+  outline:none;
+  border-radius:5px;
+  padding:15px 0;
+  font-size:2rem;
+  font-weight:$bold;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  background:$main;
+  color:$white;
+  transition:all.5s ease;
+  -webkit-appearance: none;
+  &:hover, &:focus {
+    background:$main-dark;
+  }
+}
+
+.button-block {
+  display:block;
+  width:86%;
+  /* padding-right: 30px; */
+  /* padding-left: 120px; */
+}
+
+/* input styling */
+
+.TradeID input{
+  height: 38px;
+  width: 266px;
+  background: #d6d8dd;
+  border-radius: 5px;
+  text-align: center;
+  color: black;
+}
+
+.quantity input{
+  height: 38px;
+  width: 266px;
+  background: #d6d8dd;
+  border-radius: 5px;
+  text-align: center;
+  color: black;
+}
+
+.Price input{
+  height: 38px;
+  width: 266px;
+  background: #d6d8dd;
+  border-radius: 5px;
+  text-align: center;
+  color: black;
+  font-size: 16px;
+}
+
+.time input{
+  height: 38px;
+  width: 266px;
+  background: #d6d8dd;
+  border-radius: 5px;
+  text-align: center;
+  color: black;
+}
+
+/* basic font styling */
+
+.TradeID{
+  font-family: inherit;
+  font-weight: bold;
+  color: black;
+  /* text-align: center; */
+  font-size: 23px;
+  
+}
+
+.time{
+  font-family: inherit;
+  font-weight: bold;
+  color: black;
+  /* text-align: center; */
+  font-size: 23px;
+  
+}
+
+.Price{
+  font-family: inherit;
+  font-weight: bold;
+  color: black;
+  /* text-align: center; */
+  font-size: 23px;
+  
+}
+
+.quantity{
+  font-family: inherit;
+  font-weight: bold;
+  color: black;
+  /* text-align: center; */
+  font-size: 23px;
+  
+}
+
+.trader{
+  font-family: inherit;
+  font-weight: bold;
+  color: black;
+  /* text-align: center; */
+  font-size: 23px;
+  
+}
+
+.TradeType{
+  /* font-family: inherit; */
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  font-size: 23px;
+  
+}
+
+.Broker{
+  font-family: inherit;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  font-size: 23px;
+  
+}
+
+.security{
+  font-family: inherit;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  font-size: 23px;
+  
+}
+
+.Company{
+  font-family: inherit;
+  font-weight: bold;
+  color: black;
+  /* text-align: center; */
+  font-size: 23px;
+  
+}
+
+.clientID{
+  font-family: inherit;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  font-size: 23px;
+  
+}

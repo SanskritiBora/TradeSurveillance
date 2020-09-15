@@ -8,7 +8,7 @@
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
 		java.sql.Connection conn;
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tradesurveillance", "root", "root");	
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tradesurveillance1", "root", "root");	
 	}catch(Exception e){
 		out.println(e);
 	}

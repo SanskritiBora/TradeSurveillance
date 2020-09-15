@@ -10,7 +10,7 @@
 	String timestamp = request.getParameter("date");
 	String company = request.getParameter("Company");
 	String sectype = request.getParameter("security");
-	String tradetype = request.getParameter("buyorsell");
+	String tradetype = request.getParameter("TradeType");
 	int quantity = Integer.parseInt(request.getParameter("qty"));
 	int price = Integer.parseInt(request.getParameter("Price"));
 	String broker = request.getParameter("Broker");
@@ -26,9 +26,9 @@
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
 		
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tradesurveillance", "root", "root");	
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tradesurveillance1", "root", "root");	
 		
-		if(trader.equals("Client")){
+		if(trader.equals("Customer")){
 			ps = con.prepareStatement("insert into customerorders values (?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
 			ps.setLong(1, tradeid);
 			ps.setString(2,customerName);
@@ -64,16 +64,15 @@
 		}
 		
 		Fraud tr=new Fraud();
-		ps.executeUpdate("TRUNCATE fraud");
-		ps.executeUpdate("TRUNCATE washtrade");
-		//out.println("\n-------------------------------------------------------------------------------\nScenario 1\n-------------------------------------------------------------------------------");
-		tr.scenario1(con);
-		//out.println("\n-------------------------------------------------------------------------------\nScenario 2\n-------------------------------------------------------------------------------");
-		tr.scenario2(con);
-		//out.println("\n-------------------------------------------------------------------------------\nScenario 3\n-------------------------------------------------------------------------------");
-		tr.scenario3(con);
-		//System.out.println("\n-------------------------------------------------------------------------------\nWash Trade\n-------------------------------------------------------------------------------");
-		tr.washTrades(con);
+		if(trader.equals("Customer")){
+			tr.checkCustomerTrade(con,quantity, tradetype,  company, seconds, tradeid, price );
+			
+		}
+		else{
+			tr.checkFirmTrade(con,quantity, tradetype,  company, seconds, tradeid, price );
+			tr.checkWashTrade(con, tradeid, tradetype, broker, company, quantity, price, seconds);
+		}
+		
 		
 		
 		
