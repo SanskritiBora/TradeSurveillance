@@ -84,7 +84,7 @@
 			
 			
 
-			int hh_num = (int)(Math.random() * (12 - 11 + 1) + 11);
+			int hh_num = (int)(Math.random() * (13 - 10 + 1) + 10);
 			int mm_num = (int)(Math.random() * (59 - 56 + 1) + 56);
 			int ss_num = (int)(Math.random() * (59 - 56 + 1) + 56);
 			
@@ -98,8 +98,6 @@
 			Double newData = new Double(seconds1);
 			seconds = newData.intValue();
 
-			tradeid += 1;
-
 			
 			if(customerNameNum==1)
 				customerName = "Himanshu Upadhyay";
@@ -108,9 +106,9 @@
 			else if(customerNameNum==3)
 				customerName = "Shravani Shah";
 			else if(customerNameNum==4)
-				customerName = "Neelesh";
+				customerName = "Nilesh Kavhale";
 			else if(customerNameNum==5)
-				customerName = "Krutika";
+				customerName = "Krutika Padeer";
 			
 
 			trader = ( trader_typeNum==1)? "Firm": "Customer";
@@ -143,31 +141,32 @@
 			
 			if(trader.equals("Customer")){
 
-			ps = con.prepareStatement("insert into customerorders values (?, ?, ?, ?, ?, ?, ?, ?,?,?)");
-			ps.setLong(1, tradeid);	
-			ps.setString(2,customerName);
-			ps.setString(4,company);
-			ps.setString(6, sectype);
-			ps.setString(5, tradetype);
-			ps.setInt(7, quantity);
-			ps.setFloat(8, price);
-			ps.setString(9,broker);
-			ps.setInt(10,seconds);
-			ps.setString(3,sb);
+			ps = con.prepareStatement("insert into customerorders (customerName, timestamp , company, securityType, tradeType, quantity, price, brokerName, seconds) values ( ?, ?, ?, ?, ?, ?, ?,?,?)");
+			
+			ps.setString(1,customerName);
+			ps.setString(2,sb);
+			ps.setString(3,company);
+			ps.setString(5, sectype);
+			ps.setString(4, tradetype);
+			ps.setInt(6, quantity);
+			ps.setFloat(7, price);
+			ps.setString(8,broker);
+			ps.setInt(9,seconds);
+			
 			ps.executeUpdate();
 			 
 			}
 			else{
-				ps = con.prepareStatement("insert into firmorders values (?, ?, ?, ?, ?, ?, ?, ?,?)");
-				ps.setLong(1, tradeid);	
-				ps.setInt(9,seconds);
-				ps.setString(3,company);
-				ps.setString(5, sectype);
-				ps.setString(4, tradetype);
-				ps.setInt(6, quantity);
-				ps.setFloat(7, price);
-				ps.setString(8,broker);
-				ps.setString(2,sb);
+				ps = con.prepareStatement("insert into firmorders (timestamp , company, securityType, tradeType, quantity, price, brokerName, seconds) values ( ?, ?, ?, ?, ?, ?, ?,?)");
+				ps.setString(1,sb);
+				ps.setString(2,company);
+				ps.setString(3, tradetype);
+				ps.setString(4, sectype);
+				ps.setInt(5, quantity);
+				ps.setFloat(6, price);
+				ps.setString(7,broker);
+				ps.setInt(8,seconds);
+				
 				
 				ps.executeUpdate();
 				

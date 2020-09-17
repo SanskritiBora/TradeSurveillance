@@ -39,31 +39,78 @@
 	<div class="table-wrapper">
 		<table border="1" class="fl-table">
 			<tr>
-				<th>Firm tradeid 1</th>
-				<th>Firm tradeid 2</th>
+				<th>Company</th>
+				<th>Security</th>
+				<th>Broker</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>Firm Time 1 </th>
+					<th>Firm Type 1</th>
+				<th>Firm Time 2 </th>
+				<th>Firm Type 2</th>
+			
+				<th>Firm ID 1</th>
+				<th>Firm ID 2</th>
+			
+			
+				
+				
 			</tr>
 			<%
-try{
-	PreparedStatement pstmt;
-	ResultSet rs = null;
-	pstmt=con.prepareStatement("select * from washtrade");
-	rs=pstmt.executeQuery();
-while(rs.next()){
+			try{
+				Statement stmt = con.createStatement();
+				PreparedStatement pstmt, ps = null;
+				ResultSet rs = null, rs2 = null;
+				rs=stmt.executeQuery("select * from washtrade");
+			while(rs.next()){
+				long f1 = rs.getLong("firmtradeid");
+				long f2 = rs.getLong("firmtradeid2");
+			%>
+						<tr>
+							<% 
+				ps = con.prepareStatement("select * from firmorders where tradeid = ?");
+				ps.setLong(1, f1);
+				rs2 = ps.executeQuery();				
+				while(rs2.next()){
+			%>
+							<td><%=rs2.getString("company") %></td>
+							<td><%=rs2.getString("securityType") %></td>
+							<td><%=rs2.getString("brokerName") %></td>
+							<td><%=rs2.getString("quantity") %></td>
+							<td><%=rs2.getString("price") %></td>
+							<td><%=rs2.getString("timestamp") %></td>
+							<td><%=rs2.getString("tradeType") %></td>
+							<%
+				}
+							ps = con.prepareStatement("select * from firmorders where tradeid = ?");
+							ps.setLong(1, f2);
+							rs2 = ps.executeQuery();
+							while(rs2.next()){
+			%>
+							
+							<td><%=rs2.getString("timestamp") %></td>
+							<td><%=rs2.getString("tradeType") %></td>
+							<%	
+							}
+							%>
+							
+							<td><%=f1 %></td>
+							<td><%=f2 %></td>
+						
+							<%
+							}
+							
+
+				stmt.close();
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 %>
-			<tr>
-				<td><%=rs.getLong("firmtradeid") %></td>
-				<td><%=rs.getLong("firmtradeid2") %></td>
-			</tr>
-			<%
-}
-con.close();
-} catch (Exception e) {
-e.printStackTrace();
-}
-%>
+			
 		</table>
 	</div>
-
 	<p class="para" id="para"></p>
 
 

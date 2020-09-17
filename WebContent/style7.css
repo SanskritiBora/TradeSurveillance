@@ -415,7 +415,7 @@ select {
 
 .fl-table {
     border-radius: 5px;
-    font-size: 12px;
+    font-size: 8px;
     font-weight: normal;
     border: none;
     border-collapse: collapse;
@@ -429,13 +429,13 @@ select {
 .fl-table td, .fl-table th {
     text-align: center;
     padding: 8px;
-    font-size: 30px;
+    font-size: 20px;
     
 }
 
 .fl-table td {
     border-right: 1px solid #f8f8f8;
-    font-size: 19px;
+    font-size: 12px;
 }
 
 .fl-table thead th {

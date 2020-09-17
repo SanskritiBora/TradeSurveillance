@@ -50,31 +50,95 @@
 		<table border="1" class="fl-table">
 			<tr>
 				<th>Fraud Type</th>
-				<th>Firm tradeid 1</th>
-				<th>Firm tradeid 2</th>
-				<th>Customer tradeid</th>
+				<th>Company</th>
+				<th>Security</th>
+				<th>Firm Time </th>
+				<th>Client Time</th>
+				<th>Firm Time</th>
+				<th>Firm Type</th>
+				<th>Client Type</th>
+				<th>Firm Type</th>
+				
+				<th>Firm Quantity</th>
+				<th>Client Quantity</th>
+				<th>Firm Quantity</th>
+				<th>Firm ID</th>
+				<th>Client ID</th>
+				<th>Firm ID</th>
+			
+				
+				
 			</tr>
 			<%
 try{
-	PreparedStatement pstmt;
-	ResultSet rs = null;
-	pstmt=con.prepareStatement("select * from fraud where fraudType = 'Front-running 1'");
-	rs=pstmt.executeQuery();
+	Statement stmt = con.createStatement();
+	PreparedStatement pstmt, ps = null;
+	ResultSet rs = null, rs2 = null;
+	rs=stmt.executeQuery("select * from fraud where fraudType = 'Front-running 1'");
 while(rs.next()){
+	long f1 = rs.getLong("firmtradeid");
+	long c = rs.getLong("customertradeid");
+	long f2 = rs.getLong("firmtradeid2");
+	int q1=0,q2=0,q3=0;
+	String tt1="",tt2="",tt3="";
+	
 %>
 			<tr>
 				<td><%=rs.getString("fraudtype") %></td>
-				<td><%=rs.getLong("firmtradeid") %></td>
-				<td><%=rs.getLong("firmtradeid2") %></td>
-				<td><%=rs.getLong("customertradeid") %></td>
-			</tr>
-			<%
+				<% 
+	ps = con.prepareStatement("select * from firmorders where tradeid = ?");
+	ps.setLong(1, f1);
+	rs2 = ps.executeQuery();				
+	while(rs2.next()){
+		q1=rs2.getInt("quantity");
+		tt1=rs2.getString("tradeType");
+%>
+				<td><%=rs2.getString("company") %></td>
+				<td><%=rs2.getString("securityType") %></td>
+				<td><%=rs2.getString("timestamp") %></td>
+				<%
+	}
+				ps = con.prepareStatement("select * from customerorders where tradeid = ?");
+				ps.setLong(1, c);
+				rs2 = ps.executeQuery();
+				while(rs2.next()){
+					q2=rs2.getInt("quantity");
+					tt2=rs2.getString("tradeType");
+%>
+				
+				<td><%=rs2.getString("timestamp") %></td>
+
+				<%	
+				}
+				ps = con.prepareStatement("select * from firmorders where tradeid = ?");
+				ps.setLong(1, f2);
+				rs2 = ps.executeQuery();
+				while(rs2.next()){
+					q3=rs2.getInt("quantity");
+					tt3=rs2.getString("tradeType");
+%>
+				
+				<td><%=rs2.getString("timestamp") %></td>
+				<td><%=tt1 %></td>
+				<td><%=tt2 %></td>
+				<td><%=tt3 %></td>
+				<td><%=q1 %></td>
+				<td><%=q2 %></td>
+				<td><%=q3 %></td>
+				<td><%=f1 %></td>
+				<td><%=c %></td>
+				<td><%=f2 %></td>
+				<%
+				}
+				
 }
-con.close();
+	stmt.close();
+	con.close();
 } catch (Exception e) {
-e.printStackTrace();
+	e.printStackTrace();
 }
 %>
+			
 		</table>
 	</div>
 
