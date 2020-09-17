@@ -52,7 +52,7 @@ public class Fraud {
 			}
 			//System.out.println("****************************************************");
 		}
-		//System.out.println(recordsInserted +" Record inserted successfully");
+	System.out.println(recordsInserted +" Record inserted successfully");
 		customerOrders.close();	
 		statement.close();		
 	}
@@ -95,7 +95,7 @@ public class Fraud {
 			}
 			//System.out.println("****************************************************");
 		}
-		//System.out.println(recordsInserted +" Record inserted successfully");
+		System.out.println(recordsInserted +" Record inserted successfully");
 		customerOrders.close();
 		statement.close();	
 	}
@@ -160,7 +160,7 @@ public class Fraud {
 			}
 			//System.out.println("****************************************************");
 		}
-		//System.out.println(recordsInserted +" Record inserted successfully");
+		System.out.println(recordsInserted +" Record inserted successfully");
 		customerOrders.close();
 		statement.close();
 
@@ -191,7 +191,7 @@ public class Fraud {
 			}
 			//System.out.println("****************************************************");
 		}
-		//System.out.println(recordsInserted +" Record inserted successfully");
+		System.out.println(recordsInserted +" Record inserted successfully");
 		washTrades.close();
 		statement.close();
 

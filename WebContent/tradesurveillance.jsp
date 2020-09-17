@@ -18,6 +18,7 @@
         <a href="fraud.jsp">Frauds</a>
         <a href="washtrade.jsp">Wash Trades</a>
         <a href="graph.html">Graph</a>
+        <a href="random.jsp">Data Generation</a>
     </div>
     <div class="login">
 <%
@@ -35,13 +36,12 @@
 	String broker = request.getParameter("Broker");
 	int seconds=0;
 	int j[] = new int[3];
-	String timeonly[] = timestamp.split("T");
-    String individualTime[] = timeonly[1].split(":");
+    String individualTime[] = timestamp.split(":");
       for(int i = 0; i < 3; i++) { 
     	  j[i] = Integer.parseInt(individualTime[i]); 
       }
       seconds  = 3600 * j[0] + 60 * j[1] + j[2];
-	String time = timeonly[0] + " " + timeonly[1];
+	String time = "08-09-2020" + timestamp;
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
 		

@@ -9,7 +9,7 @@
 		Class.forName("com.mysql.jdbc.Driver");
 		java.sql.Connection conn;
 		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tradesurveillance1", "root", "root");	
-	}catch(Exception e){
+	}catch(Exception e){ 
 		out.println(e);
 	}
 %>
@@ -32,6 +32,7 @@
 			Trade List</a> <a href="retrieval1.jsp">Firm Trade List</a> <a
 			href="fraud.jsp">Frauds</a> <a href="washtrade.jsp">Wash Trades</a> <a
 			href="graph.html">Graph</a>
+			<a href="random.jsp">Data Generation</a>
 
 	</div>
 
