@@ -12,7 +12,7 @@ html {
 
 .login{
   position: absolute;
-  top: 90%;
+  top: 70%;
   left: 50%;
   width: 900px;
   padding-top: 70px;
@@ -415,7 +415,7 @@ select {
 
 .fl-table {
     border-radius: 5px;
-    font-size: 8px;
+    font-size: 12px;
     font-weight: normal;
     border: none;
     border-collapse: collapse;
@@ -435,7 +435,7 @@ select {
 
 .fl-table td {
     border-right: 1px solid #f8f8f8;
-    font-size: 12px;
+    font-size: 20px;
 }
 
 .fl-table thead th {

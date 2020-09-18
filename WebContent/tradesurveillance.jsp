@@ -24,7 +24,8 @@
 <%
 	Connection con=null;
 	PreparedStatement ps=null;
-	long tradeid = Long.parseLong(request.getParameter("TradeID"));
+
+	long  tradeid =Long.parseLong(request.getParameter("TradeID"));
 	String customerName=request.getParameter("clientID");
 	String trader = request.getParameter("Trader");
 	String timestamp = request.getParameter("date");
@@ -41,17 +42,17 @@
     	  j[i] = Integer.parseInt(individualTime[i]); 
       }
       seconds  = 3600 * j[0] + 60 * j[1] + j[2];
-	String time = "08-09-2020" + timestamp;
+	String time = "08-09-2020 "+ timestamp;
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
 		
 		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tradesurveillance1", "root", "root");	
 		
 		if(trader.equals("Customer")){
-			ps = con.prepareStatement("insert into customerorders values (?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
-			ps.setLong(1, tradeid);
+			ps = con.prepareStatement("insert into customerorders  values ( ?, ?, ?, ?, ?, ?, ?,?,?,?)");
+			ps.setLong(1,tradeid);
 			ps.setString(2,customerName);
-			ps.setString(3, time);
+			ps.setString(3,time);
 			ps.setString(4,company);
 			ps.setString(5, sectype);
 			ps.setString(6, tradetype);
@@ -62,13 +63,12 @@
 			
 		}
 		else{
-			ps = con.prepareStatement("insert into firmorders values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			ps.setLong(1, tradeid);
-			
-			ps.setString(2, time);
+			ps = con.prepareStatement("insert into firmorders  values ( ?, ?, ?, ?, ?, ?, ?,?,?)");
+			ps.setLong(1,tradeid);
+			ps.setString(2,time);
 			ps.setString(3,company);
-			ps.setString(4, sectype);
-			ps.setString(5, tradetype);
+			ps.setString(4, tradetype);
+			ps.setString(5, sectype);
 			ps.setInt(6, quantity);
 			ps.setFloat(7, price);
 			ps.setString(8,broker);
@@ -79,7 +79,7 @@
 		if(i == 1){
 			
 %>
-      <h1 class="head">Trade inserted sucessfully!</h1>
+      <h1 class="head">Trade inserted successfully!</h1>
 <%
 		}else{
 %>
@@ -127,7 +127,7 @@
 		}
 		
 		
-		
+		tradeid+=1;
 		
 	}catch(Exception e){
 		out.println(e);

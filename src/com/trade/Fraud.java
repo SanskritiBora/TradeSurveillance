@@ -3,8 +3,10 @@ package com.trade;
 import java.sql.*;
 
 public class Fraud {
+	
 
 	public void scenario1(Connection connection) throws Exception {
+		
 		int recordsInserted = 0;
 		long firmTradeId1, firmTradeId2;
 		Statement statement = connection.createStatement();
@@ -540,6 +542,8 @@ public class Fraud {
 		return recordsInserted;
 			//System.out.println(recordsInserted +" Record inserted successfully");
 	}
+	
+	
 
 	public static void main(String[] args) throws Exception {
 		Fraud tr = new Fraud();

@@ -37,6 +37,8 @@
 	String broker="";
 	int tradeid=0;
 	String customerName="";
+	int count_Firm=0;
+	int count_Customer=0;
 	
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
@@ -67,7 +69,7 @@
 
 		for (int i=1;i<1000;i++){		
 			
-			
+			tradeid+=1;
 			int customerNameNum = CustomerNameNum.nextInt(5)+1;
 			int trader_typeNum = T_typeNum.nextInt(2)+1;
 			int companyNum = CompanyNum.nextInt(3)+1;
@@ -91,7 +93,7 @@
 			
 			
 			String sb="";
-			sb=hh_num+":"+(mm_num)+":"+(ss_num);
+			sb="08-09-2020 "+hh_num+":"+(mm_num)+":"+(ss_num);
 			//out.println(sb);
 			double seconds1 = (hh_num*3600+mm_num*60+ss_num);
 			
@@ -122,60 +124,67 @@
 				company = "Apple";
 
 			
-			tradetype = "Shares";
+			sectype = "Shares";
 			
-			 sectype = (tradetypeNum==1)? "BUY": "SELL";
+			 tradetype = (tradetypeNum==1)? "BUY": "SELL";
 			
 			//quantity = quantityNum;
 			price = priceNum;
 			
 			
 			if(brokerNum==1)
-				broker = "Zerodha";
+				broker = "Interactive Brokers";
 			else if(brokerNum == 2)
-				broker = "Upstox";
+				broker = "Fidelity Investments";
 			else if(brokerNum == 3)
-				broker = "Edelweiss";
+				broker = "Merrill Edge";
 			
 
 			
 			if(trader.equals("Customer")){
 
-			ps = con.prepareStatement("insert into customerorders (customerName, timestamp , company, securityType, tradeType, quantity, price, brokerName, seconds) values ( ?, ?, ?, ?, ?, ?, ?,?,?)");
-			
-			ps.setString(1,customerName);
-			ps.setString(2,sb);
-			ps.setString(3,company);
+			ps = con.prepareStatement("insert into customerorders  values ( ?, ?, ?, ?, ?, ?, ?,?,?,?)");
+			ps.setInt(1,i);
+			ps.setString(2,customerName);
+			ps.setString(3,sb);
+			ps.setString(4,company);
 			ps.setString(5, sectype);
-			ps.setString(4, tradetype);
-			ps.setInt(6, quantity);
-			ps.setFloat(7, price);
-			ps.setString(8,broker);
-			ps.setInt(9,seconds);
+			ps.setString(6, tradetype);
+			ps.setInt(7, quantity);
+			ps.setFloat(8, price);
+			ps.setString(9,broker);
+			ps.setInt(10,seconds);
 			
-			ps.executeUpdate();
-			 
+			count_Customer+=ps.executeUpdate();
+			
+			
 			}
 			else{
-				ps = con.prepareStatement("insert into firmorders (timestamp , company, securityType, tradeType, quantity, price, brokerName, seconds) values ( ?, ?, ?, ?, ?, ?, ?,?)");
-				ps.setString(1,sb);
-				ps.setString(2,company);
-				ps.setString(3, tradetype);
+				ps = con.prepareStatement("insert into firmorders  values ( ?, ?, ?, ?, ?, ?, ?,?,?)");
+				ps.setInt(1,i);
+				ps.setString(2,sb);
+				ps.setString(3,company);
 				ps.setString(4, sectype);
-				ps.setInt(5, quantity);
-				ps.setFloat(6, price);
-				ps.setString(7,broker);
-				ps.setInt(8,seconds);
+				ps.setString(5, tradetype);
+				ps.setInt(6, quantity);
+				ps.setFloat(7, price);
+				ps.setString(8,broker);
+				ps.setInt(9,seconds);
 				
 				
-				ps.executeUpdate();
+				count_Firm+=ps.executeUpdate();
 				
 				
 				
 			
 			}
-		}
 		
+		}
+		%>
+	      <h1 class="head">Records inserted in Customer Orders :<%=count_Customer %></h1>
+	      <h1 class="head">Records inserted in Firm Orders :<%=count_Firm %></h1>
+	<%
+
 		Fraud tr=new Fraud();
 		tr.scenario1(con);
 		//System.out.println("\n-------------------------------------------------------------------------------\nScenario 2\n-------------------------------------------------------------------------------");
